@@ -8,7 +8,7 @@ DNS is a lightweigt system ment to serve simple records, don't excpect any magic
 ---
 How to use
 ----------
-You can use use DNS in two setups. Docker and in a standard server with NodeJS.
+You can use use DNS in two setups. Docker and in a standard server with Node.JS.
 ###Docker
 1. Get the Docker container `docker pull meyskens/dns`
 2. Start the docker container with your etcd discovery url:
