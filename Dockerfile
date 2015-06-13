@@ -11,4 +11,6 @@ COPY ./src /src
 RUN cd /src; npm install
 
 EXPOSE  53
+EXPOSE  53/udp
+
 CMD /usr/bin/node /src/server.js $DISCOVER
