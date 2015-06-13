@@ -1,0 +1,18 @@
+{
+  "name": "DNS",
+  "version": "1.0.0",
+  "description": "Decentralised DNS server",
+  "main": "server.js",
+  "author": "Innovate Technologies",
+  "license": "AGPL",
+  "bugs": {
+    "url": "https://github.com/Innovate-Technologies/DNS/issues"
+  },
+  "homepage": "https://github.com/Innovate-Technologies/DNS",
+  "dependencies": {
+    "wait.for": "~0.6.6",
+    "restler": "~3.2.2",
+    "node-etcd": "~4.0.2",
+    "dnsd": "git+https://github.com/iMstr/dnsd.git"
+  }
+}
