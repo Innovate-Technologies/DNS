@@ -1,14 +1,15 @@
 # (IT)DNS
 
 DNS (ITDNS in cases where it may be confusing) is a small DNS server with etcd as database backend.
-The purpose of DNS is serving the corect IP to a hostname in a CoreOS cluster with a low ttl. 
+The purpose of DNS is serving the corect IP to a hostname in a CoreOS cluster with a low TTL. 
 
-DNS is a lightweigt system ment to serve simple records, don't excpect any magic. 
+DNS is a lightweight system meant to serve simple records, so don't expect any magic!
 
 ---
 How to use
 ----------
 You can use use DNS in two setups. Docker and in a standard server with Node.JS.
+
 ###Docker
 1. Get the Docker container `docker pull meyskens/dns`
 2. Start the docker container with your etcd discovery url:
@@ -17,7 +18,7 @@ You can use use DNS in two setups. Docker and in a standard server with Node.JS.
 4. That's it!
 
 ###Node.JS
-1. Git clone the repo and go to `src`
+1. Clone the repo and go to `src`
 2. Install the dependencies `npm install`
 3. Start the DNS server with the discovery url `node server.js "https://discovery.etcd.io/KEY"`
 4. Add a DNS record to etcd, eg. `etcdctl set "/DNS/sub.doma.in/A/" "[{"value":"127.0.0.1","ttl":10}]"`
