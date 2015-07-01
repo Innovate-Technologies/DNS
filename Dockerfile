@@ -10,7 +10,7 @@ RUN sudo ln -s /usr/bin/nodejs /usr/bin/node
 COPY ./src /src
 RUN cd /src; npm install
 
-EXPOSE  53
-EXPOSE  53/udp
+EXPOSE  5353
+EXPOSE  5353/udp
 
 CMD sudo /usr/bin/node /src/server.js $DISCOVER
