@@ -19,7 +19,6 @@ var lookup=function(name,type,callback){
         return
     }
     etcd.get("/DNS/"+name+"/"+type,function(err,res){
-        console.log("ETCD answered")
         if (err){
             callback(null,[])
             return
