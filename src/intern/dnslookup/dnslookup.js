@@ -19,6 +19,7 @@ var lookup=function(name,type,callback){
         return
     }
     etcd.get("/DNS/"+name+"/"+type,function(err,res){
+        console.log("ETCD answered")
         if (err){
             callback(null,[])
             return
@@ -33,6 +34,7 @@ var lookup=function(name,type,callback){
                 response.push({name:name, type:type, data:res[id].value, ttl:res[id].ttl, class: 'IN'})
             }
         }
+        callback(null,response)
         cache.addToChache("/DNS/"+name+"/"+type,response,res[0].ttl)
     })
 }

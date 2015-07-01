@@ -9,6 +9,7 @@ var connectEtcd = function(discover) {
     } else {
         var nodeetcd = require('node-etcd')
         var hosts = getHost(discover)
+        console.log(hosts)
         etcd = new nodeetcd(hosts)
     }
 }

@@ -30,6 +30,5 @@ var handle=function(req,res) {
         }
         
     }
-    console.log(res.answer)
     res.end()
 }
