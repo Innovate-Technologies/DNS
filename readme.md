@@ -13,7 +13,7 @@ You can use use DNS in two setups. Docker and in a standard server with Node.JS.
 ###Docker
 1. Get the Docker container `docker pull meyskens/dns`
 2. Start the docker container with your etcd discovery url:
-   `docker run -e DISCOVER="https://discovery.etcd.io/KEY" -p 53:53 --name DNS meyskens/dns`
+   `docker run -e DISCOVER="https://discovery.etcd.io/KEY" -p 53:53/udp --name DNS meyskens/dns`
 3. Add a DNS record to etcd, eg. `etcdctl set "/DNS/sub.doma.in/A/" "[{"value":"127.0.0.1","ttl":10}]"`
 4. That's it!
 
