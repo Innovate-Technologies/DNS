@@ -9,9 +9,9 @@ var dnsd = require('dnsd'),
     wait=require("wait.for")
 dnsd.createServer(function(req,res){
     wait.launchFiber(handle,req,res)
-}).listen(5353)
+}).listen(53)
 
-console.log('Server running at port 5353')
+console.log('Server running at port 53')
 
 var handle=function(req,res) {
     for (var id in req.question){
