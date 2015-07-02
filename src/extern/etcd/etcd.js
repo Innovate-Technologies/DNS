@@ -49,7 +49,7 @@ var getHost = function(discover, callback) {
 
 var doHTTPGet = function(url, callback) {
     rest.get(url, {
-        timeout: 1000
+        timeout: 10000
     }).on("complete", function(res) {
         if (res instanceof Error) {
             callback(res)
