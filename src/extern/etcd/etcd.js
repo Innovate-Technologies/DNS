@@ -76,6 +76,10 @@ var get = function(key, callback) {
     })
 }
 
+var set=function(key,value){
+    etcd.set(key,value)
+}
+
 var isJSON = function(text) {
     if (/^[\],:{}\s]*$/.test(text.replace(/\\["\\\/bfnrtu]/g, '@').replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g, ']').replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
         return true
@@ -89,3 +93,4 @@ module.exports.connectEtcd = function(discover) {
     wait.launchFiber(connectEtcd, discover)
 }
 module.exports.get = get
+module.exports.set = set
