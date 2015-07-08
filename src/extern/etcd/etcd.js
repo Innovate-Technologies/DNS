@@ -65,6 +65,7 @@ var doHTTPGet = function(url, callback) {
 var get = function(key, callback) {
     if (typeof etcd === "undefined"){
         callback("etcd is not started yet")
+        return
     }
     etcd.get(key, function(err, res) {
         if (err) {
