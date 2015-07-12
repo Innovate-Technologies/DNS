@@ -72,7 +72,7 @@ var get = function(key, callback) {
             callback(err)
             return
         }
-        if (isJSON) {
+        if (isJSON(res.node.value)) {
             callback(null, JSON.parse(res.node.value))
         } else {
             callback(null, res.node.value)
@@ -92,9 +92,14 @@ var isJSON = function(text) {
     }
 }
 
+var watch= function(key,callback){
+    etcd.watch(key,callback)
+}
+
 
 module.exports.connectEtcd = function(discover) {
     wait.launchFiber(connectEtcd, discover)
 }
 module.exports.get = get
 module.exports.set = set
+module.exports.watch = watch

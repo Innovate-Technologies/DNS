@@ -1,4 +1,4 @@
-var etcd=require("../../extern/etcd/etcd.js")
+global.etcd=require("../../extern/etcd/etcd.js")
 var cache=require("../cache/cache.js")
 var discoverhost=""
 for (var id in process.argv){
@@ -6,7 +6,7 @@ for (var id in process.argv){
         discoverhost=process.argv[id]
     }
 }
-etcd.connectEtcd(discoverhost)
+global.etcd.connectEtcd(discoverhost)
 
 
 var lookup=function(name,type,callback){
@@ -18,7 +18,7 @@ var lookup=function(name,type,callback){
         callback(null,cache.getFromCache("/DNS/"+name+"/"+type))
         return
     }
-    etcd.get("/DNS/"+name+"/"+type,function(err,res){
+    global.etcd.get("/DNS/"+name+"/"+type,function(err,res){
         if (err){
             callback(null,[])
             return
