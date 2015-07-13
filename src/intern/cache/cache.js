@@ -26,7 +26,6 @@ var getFromCache = function(key) {
 }
 
 var watchForUpdates = function(key) {
-    console.log("I have been asked to watch for "+key)
     global.etcd.watch(key, function(err, change) {
         if (typeof key !=="undefined"){
             watchForUpdates(key)
