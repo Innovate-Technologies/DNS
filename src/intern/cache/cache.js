@@ -28,6 +28,7 @@ var getFromCache = function(key) {
 var watchForUpdates = function(key) {
     global.etcd.watch(key, function(err, change) {
         if (err || typeof change === "undefined" || typeof change.node === "undefined" || typeof change.node.value === "undefined") {
+            watchForUpdates(key)
             return
         }
         var newval = change.node.value
