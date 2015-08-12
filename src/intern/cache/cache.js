@@ -16,7 +16,7 @@ var isKeyInCache = function(key) {
 
 }
 
-var addToChache = function(key, value, ttlval) {
+var addToChache = function(key, value) {
     cache[key] = value
     watchForUpdates(key)
 }

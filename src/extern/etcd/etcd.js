@@ -62,14 +62,34 @@ var doHTTPGet = function(url, callback) {
 }
 
 
-var get = function(key, callback) {
-    if (typeof etcd === "undefined"){
+var get = function(key, options, callback) {
+    if (typeof etcd === "undefined") {
         callback("etcd is not started yet")
         return
     }
-    etcd.get(key, function(err, res) {
+    if (typeof callback === "undefined") {
+        callback = options
+        options = {}
+    }
+    etcd.get(key, options, function(err, res) {
         if (err) {
             callback(err)
+            return
+        }
+        if (typeof res.node.nodes === "object") {
+            var returnArr = []
+            for (var id in res.node.nodes) {
+                if (isJSON(res.node.nodes[id].value)) {
+                    var info= JSON.parse(res.node.nodes[id].value)
+                    for (var recordID in info){
+                        if (info.hasOwnProperty(recordID)){
+                            info[recordID].type=res.node.nodes[id].key.split("/")[res.node.nodes[id].key.split("/").length-1]
+                        }
+                    }
+                    returnArr.push(info)
+                }
+            }
+            callback(null,returnArr)
             return
         }
         if (isJSON(res.node.value)) {
@@ -80,8 +100,8 @@ var get = function(key, callback) {
     })
 }
 
-var set=function(key,value){
-    etcd.set(key,value)
+var set = function(key, value) {
+    etcd.set(key, value)
 }
 
 var isJSON = function(text) {
@@ -92,8 +112,8 @@ var isJSON = function(text) {
     }
 }
 
-var watch= function(key,callback){
-    etcd.watch(key,callback)
+var watch = function(key, callback) {
+    etcd.watch(key, callback)
 }
 
 

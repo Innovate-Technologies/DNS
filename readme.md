@@ -23,3 +23,9 @@ You can use use DNS in two setups. Docker and in a standard server with Node.JS.
 3. Start the DNS server with the discovery url `node server.js "https://discovery.etcd.io/KEY"`
 4. Add a DNS record to etcd, eg. `etcdctl set '/DNS/sub.doma.in/A/' '[{"value":"127.0.0.1","ttl":10}]'`
 5. That's it! (I'm sure you will do it differently)
+---
+New in 1.1
+----------
+Version 1.1 adds support for non-A records. On a request DNS will send back all records for the domain specified. Theoreticly every type of record is supported now.
+
+To add a MX record for example just do `etcdctl set '/DNS/sub.doma.in/MX/' '[{"value":[1, "aspmx.l.google.com"],"ttl":10}]'`
