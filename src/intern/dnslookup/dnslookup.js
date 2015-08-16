@@ -1,22 +1,22 @@
-global.etcd = require("../../extern/etcd/etcd.js")
-var cache = require("../cache/cache.js")
-var discoverhost = ""
-for (var id in process.argv) {
-    if (process.argv.hasOwnProperty(id) && process.argv[id].indexOf("http") > -1) {
-        discoverhost = process.argv[id]
+if (typeof global.etcd === "undefined") {
+    global.etcd = require("../../extern/etcd/etcd.js")
+    var discoverhost = ""
+    for (var id in process.argv) {
+        if (process.argv.hasOwnProperty(id) && process.argv[id].indexOf("http") > -1) {
+            discoverhost = process.argv[id]
+        }
     }
+    global.etcd.connectEtcd(discoverhost)
 }
-global.etcd.connectEtcd(discoverhost)
-
+var cache = require("../cache/cache.js")
 
 var lookup = function(name, type, callback) {
     if (name.indexOf("..") > -1 || type.indexOf("..") > -1) {
         callback(null, [])
         return
     }
-    if (cache.isKeyInCache("/DNS/" + name + "/" + type)) {
-        callback(null, cache.getFromCache("/DNS/" + name + "/"))
-        return
+    if (cache.isKeyInCache("/DNS/" + name + "/")) {
+        return callback(null, cache.getFromCache("/DNS/" + name + "/"))
     }
     global.etcd.get("/DNS/" + name + "/", {
         recursive: true
@@ -45,7 +45,7 @@ var lookup = function(name, type, callback) {
 
         }
         callback(null, response)
-        cache.addToChache("/DNS/" + name + "/", response)
+        cache.addToCache("/DNS/" + name + "/", response)
     })
 }
 

@@ -115,6 +115,9 @@ var isJSON = function(text) {
 var watch = function(key, callback) {
     etcd.watch(key, callback)
 }
+var watcher = function(key,index,options){
+    return etcd.watcher(key,index,options)
+}
 
 
 module.exports.connectEtcd = function(discover) {
@@ -123,3 +126,4 @@ module.exports.connectEtcd = function(discover) {
 module.exports.get = get
 module.exports.set = set
 module.exports.watch = watch
+module.exports.watcher=watcher
